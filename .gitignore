@@ -1,0 +1,5 @@
+
+*/target
+lib/twitter-*.jar
+sling/sling
+sling/derby.log
