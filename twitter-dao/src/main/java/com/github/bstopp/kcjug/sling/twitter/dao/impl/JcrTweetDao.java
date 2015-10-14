@@ -168,7 +168,7 @@ public class JcrTweetDao implements TweetDao {
         StringBuilder sql = new StringBuilder(256);
         sql.append("SELECT * from [nt:unstructured] as tweet ");
         sql.append("WHERE ISDESCENDANTNODE(tweet, '").append(accountPath).append("') ");
-        sql.append("AND tweet.[").append(Tweet.SCREEN_NAME).append("] IS NOT NULL").append(" ");
+        sql.append("AND CONTAINS(tweet.[").append(Tweet.SCREEN_NAME).append("], '").append(screenName).append("') ");
         sql.append("ORDER BY tweet.[created] DESC");
         LOG.debug("SQL: {}", sql.toString());
 
@@ -239,5 +239,15 @@ public class JcrTweetDao implements TweetDao {
     private String buildPath(String... tokens) {
         LOG.debug("JcrTwitterDao - building Path ");
         return StringUtils.join(tokens, "/");
+    }
+
+    protected void bindResourceResolverFactory(ResourceResolverFactory resourceResolverFactory) {
+        this.resourceResolverFactory = resourceResolverFactory;
+    }
+
+    protected void unbindResourceResolverFactory(ResourceResolverFactory resourceResolverFactory) {
+        if (this.resourceResolverFactory == resourceResolverFactory) {
+            this.resourceResolverFactory = null;
+        }
     }
 }

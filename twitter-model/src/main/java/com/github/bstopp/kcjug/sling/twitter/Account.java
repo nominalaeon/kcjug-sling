@@ -1,6 +1,13 @@
 
 package com.github.bstopp.kcjug.sling.twitter;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
+
+@Model(adaptables = Resource.class)
 public class Account {
 
     public static final String USER_ID_PROP       = "user.id";
@@ -11,13 +18,33 @@ public class Account {
     public static final String FOLLOWERS_PROP     = "followers";
     public static final String FRIENDS_PROP       = "friends";
 
-    private Long   userId;
-    private String screenName;
-    private String profileUrl;
-    private String profileImage;
-    private String description;
-    private int    followers;
-    private int    friends;
+    @Inject
+    @Named(USER_ID_PROP)
+    private Long               userId;
+
+    @Inject
+    @Named(SCREEN_NAME_PROP)
+    private String             screenName;
+
+    @Inject
+    @Named(PROFILE_URL_PROP)
+    private String             profileUrl;
+
+    @Inject
+    @Named(PROFILE_IMAGE_PROP)
+    private String             profileImage;
+
+    @Inject
+    @Named(DESCRIPTION_PROP)
+    private String             description;
+
+    @Inject
+    @Named(FOLLOWERS_PROP)
+    private int                followers;
+
+    @Inject
+    @Named(FRIENDS_PROP)
+    private int                friends;
 
     public Long getUserId() {
         return userId;

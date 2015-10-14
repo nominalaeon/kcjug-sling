@@ -4,6 +4,7 @@
 
 package com.github.bstopp.kcjug.sling.twitter;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.inject.Inject;
@@ -110,6 +111,10 @@ public class Tweet {
 
     public void setScreenName(String screenName) {
         this.screenName = screenName;
+    }
+
+    public String getFormattedCreated() {
+        return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(created.getTime());
     }
 
     public Calendar getCreated() {

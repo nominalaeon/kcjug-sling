@@ -39,7 +39,7 @@ public class TwitterSyncJob implements Runnable {
     // TODO add screen name as a config value and then turn this into a factory.
 
     @Reference
-    private TwitterApiService   service;
+    private TwitterApiService   twitterApiService;
 
     @Reference
     private AccountDao          accountDao;
@@ -52,9 +52,9 @@ public class TwitterSyncJob implements Runnable {
         LOG.debug("Starting Twitter Sync Job");
 
         try {
-            accountDao.save(service.getAccount());
+            accountDao.save(twitterApiService.getAccount());
             Tweet latest = tweetDao.getMostRecent();
-            List<Tweet> tweets = service.getTweets(latest);
+            List<Tweet> tweets = twitterApiService.getTweets(latest);
             for (Tweet t : tweets) {
                 tweetDao.save(t);
             }
@@ -72,5 +72,35 @@ public class TwitterSyncJob implements Runnable {
     @Activate
     protected void activate(ComponentContext context) throws Exception {
         LOG.debug("TwitterSyncJob - Activate");
+    }
+
+    protected void bindAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
+
+    protected void unbindAccountDao(AccountDao accountDao) {
+        if (this.accountDao == accountDao) {
+            this.accountDao = null;
+        }
+    }
+
+    protected void bindTweetDao(TweetDao tweetDao) {
+        this.tweetDao = tweetDao;
+    }
+
+    protected void unbindTweetDao(TweetDao tweetDao) {
+        if (this.tweetDao == tweetDao) {
+            this.tweetDao = null;
+        }
+    }
+
+    protected void bindTwitterApiService(TwitterApiService twitterApiService) {
+        this.twitterApiService = twitterApiService;
+    }
+
+    protected void unbindTwitterApiService(TwitterApiService twitterApiService) {
+        if (this.twitterApiService == twitterApiService) {
+            this.twitterApiService = null;
+        }
     }
 }

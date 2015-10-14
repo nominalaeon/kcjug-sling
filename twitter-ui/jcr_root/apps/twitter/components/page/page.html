@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>${properties.jcr:title}</title>
+    </head>
+    <body> 
+        <div id="logo" title="${properties.jcr:title}">&nbsp;</div>
+        List of Twitter Accounts:
+        <div data-sly-resource="${ '/content/twitter/data/accounts/StoppThinking' @ resourceType='twitter/components/account'}">StoppThinking</div>
+    </body>
+</html>

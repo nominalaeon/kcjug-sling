@@ -1,0 +1,14 @@
+<div data-sly-use.account="com.github.bstopp.kcjug.sling.twitter.Account">
+    <ul>
+        <li>User Id: <span class="user-id">${account.userId}</span></li>
+        <li>Screen Name: <span class="screen-name">${account.screenName}</span></li>
+        <li>Description: <span class="description">${account.description}</span></li>
+        <li>Followers: <span class="followers">${account.followers}</span></li>
+        <li>Friends: <span class="friends">${account.friends}</span></li>
+        <li>Profile URL: <a href="#" data-sly-attribute.href="${account.profileUrl}">Link</a></li>
+        <li>Avatar: <img src="" data-sly-attribute.src="${account.profileImage}" /></li>
+    </ul>
+    <div data-sly-test="${request.requestPathInfo.selectors}">
+        <div data-sly-resource="${ 'tweets' @ resourceType='twitter/components/tweets'}">List Of Tweets</div>
+    </div>
+</div>

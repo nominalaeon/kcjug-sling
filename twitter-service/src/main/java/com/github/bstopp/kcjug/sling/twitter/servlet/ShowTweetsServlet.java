@@ -64,4 +64,24 @@ public class ShowTweetsServlet extends SlingSafeMethodsServlet {
             LOG.error("Error occured writing JSON.", ex);
         }
     }
+
+    protected void bindAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
+
+    protected void unbindAccountDao(AccountDao accountDao) {
+        if (this.accountDao == accountDao) {
+            this.accountDao = null;
+        }
+    }
+
+    protected void bindTweetDao(TweetDao tweetDao) {
+        this.tweetDao = tweetDao;
+    }
+
+    protected void unbindTweetDao(TweetDao tweetDao) {
+        if (this.tweetDao == tweetDao) {
+            this.tweetDao = null;
+        }
+    }
 }

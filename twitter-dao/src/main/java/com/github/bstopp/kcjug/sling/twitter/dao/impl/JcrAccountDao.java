@@ -148,4 +148,13 @@ public class JcrAccountDao implements AccountDao {
         }
     }
 
+    protected void bindResourceResolverFactory(ResourceResolverFactory resourceResolverFactory) {
+        this.resourceResolverFactory = resourceResolverFactory;
+    }
+
+    protected void unbindResourceResolverFactory(ResourceResolverFactory resourceResolverFactory) {
+        if (this.resourceResolverFactory == resourceResolverFactory) {
+            this.resourceResolverFactory = null;
+        }
+    }
 }

@@ -1,0 +1,23 @@
+<template data-sly-template.tweettpl="${@ tweet='A Tweet object.'}">
+    Tweet (ID: ${tweet.statusId}) :
+    <ul>
+        <li class="tweet-date">Created: ${tweet.formattedCreated}</li>
+        <li class="tweet">${tweet.formattedText @ context='html' }</li>
+        <li data-sly-test="${tweet.retweet}" data-sly-unwrap>
+            <li data-sly-call="${tweettpl @ tweet=tweet.original}">
+
+            </li>
+        </li>
+    </ul>
+</template>
+<div data-sly-use.tweets="TweetList">
+    Tweets:
+    <ul data-sly-list="${tweets.getTweets}">
+        <li data-sly-call="${tweettpl @ tweet=item}" class="tweet-item">
+            <ul>
+                <li class="tweet-status-id">Mock Status</li>
+                <li class="tweet-date">Today</li>
+            </ul>
+        </li>
+    </ul>
+</div>
